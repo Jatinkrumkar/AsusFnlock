@@ -25,4 +25,4 @@ jobs:
     - name: Upload .exe to Release natively
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: gh release upload "${{ github.event.release.tag_name }}" "./release_output/AsusSoftwareFnLock.exe" --clobber
+      run: gh release upload "${{ github.event.release.tag_name }}" "./release_output/*.exe" --clobber
