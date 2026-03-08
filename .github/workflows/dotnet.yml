@@ -1,28 +1,33 @@
-# This workflow will build a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+name: Build and Release ASUS Fn-Lock
 
-name: .NET
-
+# THE FIX: Only trigger the build when a tag starting with 'v' (like v1.0.5) is created. 
+# This completely ignores regular code pushes!
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
 
 jobs:
-  build:
-
+  build-and-upload:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Setup .NET
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET 8
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
+
     - name: Publish the App
       run: dotnet publish -c Release -r win-x64 --self-contained false -o ./release_output
+
     - name: Upload .exe to Release natively
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # We can safely use github.ref_name now, because this script ONLY runs when a tag is created!
       run: gh release upload "${{ github.ref_name }}" ./release_output/*.exe --clobber
