@@ -21,9 +21,8 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Publish the App
-      run: dotnet publish -c Release -r win-x64 --self-contained false -o ./output
-    - name: Upload Build Artifact
-      uses: actions/upload-artifact@v4
+      run: dotnet publish -c Release -r win-x64 --self-contained false -o ./release_output
+    - name: Upload .exe to Release
+      uses: softprops/action-gh-release@v2
       with:
-        name: AsusSoftwareFnLock-Release
-        path: ./output/
+        files: ./release_output/AsusSoftwareFnLock.exe
