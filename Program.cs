@@ -72,8 +72,8 @@ class SoftwareFnLock
     static OsdForm currentOsd = null;
     static int currentTickCount = 0;
 
-    static string lockedIconPath = @"C:\Users\Jatin\Desktop\code\FnLockToggle\OSD\Locked.png";
-    static string unlockedIconPath = @"C:\Users\Jatin\Desktop\code\FnLockToggle\OSD\Normal.png";
+    static string lockedIconPath = @"OSD\Locked.png";
+    static string unlockedIconPath = @"OSD\Normal.png";
 
     [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
     static extern IntPtr CreateFile(string lpFileName, uint dwDesiredAccess, uint dwShareMode,
@@ -468,3 +468,4 @@ class OsdForm : Form
     }
 
 }
+
