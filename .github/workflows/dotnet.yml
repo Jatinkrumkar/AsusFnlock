@@ -22,8 +22,7 @@ jobs:
         dotnet-version: 8.0.x
     - name: Publish the App
       run: dotnet publish -c Release -r win-x64 --self-contained false -o ./release_output
-    - name: Upload .exe to Release
-      uses: softprops/action-gh-release@v2
-      with:
-        tag_name: ${{ github.event.release.tag_name }}
-        files: ./release_output/AsusSoftwareFnLock.exe
+    - name: Upload .exe to Release natively
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: gh release upload "${{ github.event.release.tag_name }}" "./release_output/AsusSoftwareFnLock.exe" --clobber
