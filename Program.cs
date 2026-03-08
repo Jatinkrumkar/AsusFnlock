@@ -1,7 +1,6 @@
 ﻿#nullable disable
 // SoftwareFnLock.cs
-// Software FN-Lock for ASUS ROG Strix G16
-// Run as Administrator
+// Software FN-Lock for ASUS LAPTOPS
 
 using System;
 using System.Diagnostics;
@@ -467,4 +466,5 @@ class OsdForm : Form
     {
         this.DoubleBuffered = true;
     }
+
 }
